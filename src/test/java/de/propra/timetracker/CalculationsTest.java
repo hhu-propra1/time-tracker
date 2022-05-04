@@ -16,4 +16,13 @@ class CalculationsTest {
         assertThat(sumMinutes(List.of())).isZero();
     }
 
+    @Test
+    @DisplayName("One event in a list gives the event's minutes.")
+    void test2() {
+        Event event = new Event("2022-05-04", 30, "ProPra1", "Events schreiben implementieren");
+        List<Event> events = List.of(event);
+        assertThat(sumMinutes(events)).isEqualTo(30);
+    }
+
+
 }
