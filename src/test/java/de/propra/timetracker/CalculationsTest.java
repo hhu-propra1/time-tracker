@@ -24,5 +24,11 @@ class CalculationsTest {
         assertThat(sumMinutes(events)).isEqualTo(30);
     }
 
-
+    @Test
+    @DisplayName("Two events returns the sum of their minutes.")
+    void test3() {
+        Event event = new Event("2022-05-04", 30, "ProPra1", "Events schreiben implementieren");
+        List<Event> events = List.of(event, event);
+        assertThat(sumMinutes(events)).isEqualTo(60);
+    }
 }

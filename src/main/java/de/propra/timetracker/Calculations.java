@@ -4,10 +4,8 @@ import java.util.List;
 
 public class Calculations {
     static int sumMinutes(List<Event> events) {
-        if (events.isEmpty()) {
-            return 0;
-        } else {
-            return 30;
-        }
+        return events.stream()
+                .mapToInt(Event::minuten)
+                .sum();
     }
 }
