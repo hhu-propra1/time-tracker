@@ -3,7 +3,7 @@ package de.propra.timetracker;
 import org.apache.commons.cli.*;
 
 enum CLIStatus {
-    HELP, ERROR
+    HELP, SUM_MINUTES, ERROR
 }
 
 public class TimeTrackerCLI {
@@ -22,6 +22,8 @@ public class TimeTrackerCLI {
 
     CLIStatus readCLI(String[] args) {
         options.addOption("h", "help", false, "Zeige diese Hilfe an");
+        // --add 2022-05-11 90 ProPra1 "Stream #4"
+        // --sum
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
