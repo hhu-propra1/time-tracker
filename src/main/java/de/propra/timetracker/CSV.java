@@ -11,14 +11,34 @@ import java.io.Reader;
 import java.util.List;
 
 public class CSV {
-    private static final String TASKS_CSV = "src/main/resources/tasks.csv";
     private static final CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
             .setHeader(Spalten.class)
             .setSkipHeaderRecord(true)
             .build();
+    private final String pathToCSV;
+    private final boolean shouldWrite;
 
-    static List<Event> readCSV() throws IOException {
-        try (Reader in = new FileReader(TASKS_CSV)) {
+    public CSV(String pathToCSV, boolean shouldWrite) {
+        this.pathToCSV = pathToCSV;
+        this.shouldWrite = shouldWrite;
+    }
+
+    public CSV() {
+        this.pathToCSV = "src/main/resources/tasks.csv";
+        this.shouldWrite = true;
+    }
+
+    void appendEvent(Event event) throws IOException {
+        if (this.shouldWrite) {
+            FileWriter out = new FileWriter(pathToCSV, true);
+            try (CSVPrinter printer = new CSVPrinter(out, csvFormat)) {
+                printer.printRecord(event.asList());
+            }
+        }
+    }
+
+    List<Event> readCSV() throws IOException {
+        try (Reader in = new FileReader(pathToCSV)) {
             CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
                     .setHeader(Spalten.class)
                     .setSkipHeaderRecord(true)
@@ -27,13 +47,6 @@ public class CSV {
             return records.stream()
                     .map(Event::new)
                     .toList();
-        }
-    }
-
-    static void appendEvent(Event event) throws IOException {
-        FileWriter out = new FileWriter(TASKS_CSV, true);
-        try (CSVPrinter printer = new CSVPrinter(out, csvFormat)) {
-            printer.printRecord(event.asList());
         }
     }
 }

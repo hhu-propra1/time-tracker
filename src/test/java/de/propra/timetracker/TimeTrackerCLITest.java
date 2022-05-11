@@ -14,7 +14,8 @@ class TimeTrackerCLITest {
 
     @BeforeEach
     void init() {
-        this.timeTrackerCLI = new TimeTrackerCLI();
+        CSV csv = new CSV("src/test/resources/tasks.csv", false);
+        this.timeTrackerCLI = new TimeTrackerCLI(csv);
     }
 
     @Test

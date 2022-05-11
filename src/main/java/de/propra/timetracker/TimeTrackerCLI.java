@@ -11,9 +11,14 @@ enum CLIStatus {
 public class TimeTrackerCLI {
 
     private static Options options = new Options();
+    private CSV csv;
+
+    public TimeTrackerCLI(CSV csv) {
+        this.csv = csv;
+    }
 
     public static void main(String[] args) throws IOException {
-        TimeTrackerCLI timeTrackerCLI = new TimeTrackerCLI();
+        TimeTrackerCLI timeTrackerCLI = new TimeTrackerCLI(new CSV());
         timeTrackerCLI.readCLI(args);
     }
 
@@ -39,7 +44,7 @@ public class TimeTrackerCLI {
                 hilfe();
                 return CLIStatus.HELP;
             } else if (cmd.hasOption("s")) {
-                int minutes = Calculations.sumMinutes(CSV.readCSV());
+                int minutes = Calculations.sumMinutes(csv.readCSV());
                 System.out.printf("Summe: %d Minuten", minutes);
                 return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("a")) {
