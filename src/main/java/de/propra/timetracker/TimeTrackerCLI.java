@@ -2,6 +2,8 @@ package de.propra.timetracker;
 
 import org.apache.commons.cli.*;
 
+import java.io.IOException;
+
 enum CLIStatus {
     HELP, SUM_MINUTES, ERROR
 }
@@ -10,7 +12,7 @@ public class TimeTrackerCLI {
 
     private static Options options = new Options();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         TimeTrackerCLI timeTrackerCLI = new TimeTrackerCLI();
         timeTrackerCLI.readCLI(args);
     }
@@ -20,10 +22,11 @@ public class TimeTrackerCLI {
         formatter.printHelp("time-tracker", options);
     }
 
-    CLIStatus readCLI(String[] args) {
+    CLIStatus readCLI(String[] args) throws IOException {
         options.addOption("h", "help", false, "Zeige diese Hilfe an");
-        // --add 2022-05-11 90 ProPra1 "Stream #4"
+        options.addOption("s", "sum", false, "Summiere eingegebene Einträge");
         // --sum
+        // --add 2022-05-11 90 ProPra1 "Stream #4"
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
@@ -33,6 +36,10 @@ public class TimeTrackerCLI {
             if (cmd.hasOption("h")) {
                 hilfe();
                 return CLIStatus.HELP;
+            } else if (cmd.hasOption("s")) {
+                int minutes = Calculations.sumMinutes(CSV.readCSV());
+                System.out.printf("Summe: %d Minuten", minutes);
+                return CLIStatus.SUM_MINUTES;
             }
 
         } catch (ParseException e) {

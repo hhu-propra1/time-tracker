@@ -1,9 +1,10 @@
 package de.propra.timetracker;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,14 +19,14 @@ class TimeTrackerCLITest {
 
     @Test
     @DisplayName("Leerer Aufruf, zeige Hilfe an.")
-    void readCLI1() {
+    void readCLI1() throws IOException {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{});
         assertThat(cliStatus).isEqualTo(CLIStatus.HELP);
     }
 
     @Test
     @DisplayName("-h, zeige Hilfe an.")
-    void readCLI2() {
+    void readCLI2() throws IOException {
         // Act
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"-h"});
         // Assert
@@ -33,9 +34,8 @@ class TimeTrackerCLITest {
     }
 
     @Test
-    @Disabled
     @DisplayName("--sum summiert alle Einträge und gibt sie aus.")
-    void readCLI3() {
+    void readCLI3() throws IOException {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--sum"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SUM_MINUTES);
     }
