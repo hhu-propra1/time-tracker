@@ -40,10 +40,7 @@ public class TimeTrackerCLI {
 
         try {
             cmd = parser.parse(options, args);
-            if (cmd.hasOption("h")) {
-                hilfe();
-                return CLIStatus.HELP;
-            } else if (cmd.hasOption("s")) {
+            if (cmd.hasOption("s")) {
                 int minutes = Calculations.sumMinutes(csv.readCSV());
                 System.out.printf("Summe: %d Minuten", minutes);
                 return CLIStatus.SUM_MINUTES;
