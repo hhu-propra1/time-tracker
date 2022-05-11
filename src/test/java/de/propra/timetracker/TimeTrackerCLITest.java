@@ -39,4 +39,15 @@ class TimeTrackerCLITest {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--sum"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SUM_MINUTES);
     }
+
+    @Test
+    @DisplayName("--add fügt neuen Eintrag hinzu.")
+    void readCLI4() throws IOException {
+        String[] arguments = {
+                "--add",
+                "2022-05-11,90,ProPra1,\"Stream #4\""
+        };
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(arguments);
+        assertThat(cliStatus).isEqualTo(CLIStatus.ADD_ENTRY);
+    }
 }
