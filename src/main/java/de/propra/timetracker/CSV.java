@@ -35,11 +35,11 @@ public class CSV {
         }
     }
 
-    void appendEvent(Event event) throws IOException {
+    void appendRow(List<String> row) throws IOException {
         if (this.shouldWrite) {
             FileWriter out = new FileWriter(String.valueOf(DEFAULT_PATH_TO_TASKS), true);
             try (CSVPrinter printer = new CSVPrinter(out, csvFormat)) {
-                printer.printRecord(event.asList());
+                printer.printRecord(row);
             }
         }
     }

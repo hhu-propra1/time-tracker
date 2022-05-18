@@ -47,7 +47,7 @@ public class TimeTrackerCLI {
             } else if (cmd.hasOption("a")) {
                 String[] optionValues = cmd.getOptionValues("a");
                 Event event = new Event(optionValues[0], Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
-                csv.appendEvent(event);
+                csv.appendRow(event.asList());
                 return CLIStatus.ADD_ENTRY;
             }
         } catch (ParseException e) {
