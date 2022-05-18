@@ -32,6 +32,7 @@ public class CSV {
         if (!Files.exists(DEFAULT_PATH_TO_TASKS)) {
             Files.createDirectories(DEFAULT_PATH_TO_TASKS.getParent());
             Files.createFile(DEFAULT_PATH_TO_TASKS);
+            appendRow(Spalten.asList());
         }
     }
 
