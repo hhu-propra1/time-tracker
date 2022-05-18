@@ -18,7 +18,7 @@ public class TimeTrackerCLI {
     }
 
     public static void main(String[] args) throws IOException {
-        TimeTrackerCLI timeTrackerCLI = new TimeTrackerCLI(new CSV());
+        TimeTrackerCLI timeTrackerCLI = new TimeTrackerCLI(new CSV(true));
         timeTrackerCLI.readCLI(args);
     }
 

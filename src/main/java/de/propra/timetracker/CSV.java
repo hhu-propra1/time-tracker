@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -16,24 +18,26 @@ public class CSV {
             .setHeader(Spalten.class)
             .setSkipHeaderRecord(true)
             .build();
-    private static final String DEFAULT_PATH_TO_TASKS =
-            String.valueOf(Paths.get(System.getProperty("user.home"), ".config", "time-tracker", "tasks.csv"));
+    private static final Path DEFAULT_PATH_TO_TASKS =
+            Paths.get(System.getProperty("user.home"), ".config", "time-tracker", "tasks.csv");
 
-    private final String pathToCSV;
     private final boolean shouldWrite;
 
-    public CSV(String pathToCSV, boolean shouldWrite) {
-        this.pathToCSV = pathToCSV;
+    public CSV(boolean shouldWrite) throws IOException {
         this.shouldWrite = shouldWrite;
+        initCSV();
     }
 
-    public CSV() {
-        this(DEFAULT_PATH_TO_TASKS, true);
+    private void initCSV() throws IOException {
+        if (!Files.exists(DEFAULT_PATH_TO_TASKS)) {
+            Files.createDirectories(DEFAULT_PATH_TO_TASKS.getParent());
+            Files.createFile(DEFAULT_PATH_TO_TASKS);
+        }
     }
 
     void appendEvent(Event event) throws IOException {
         if (this.shouldWrite) {
-            FileWriter out = new FileWriter(pathToCSV, true);
+            FileWriter out = new FileWriter(String.valueOf(DEFAULT_PATH_TO_TASKS), true);
             try (CSVPrinter printer = new CSVPrinter(out, csvFormat)) {
                 printer.printRecord(event.asList());
             }
@@ -41,7 +45,7 @@ public class CSV {
     }
 
     List<Event> readCSV() throws IOException {
-        try (Reader in = new FileReader(pathToCSV)) {
+        try (Reader in = new FileReader(String.valueOf(DEFAULT_PATH_TO_TASKS))) {
             CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
                     .setHeader(Spalten.class)
                     .setSkipHeaderRecord(true)
