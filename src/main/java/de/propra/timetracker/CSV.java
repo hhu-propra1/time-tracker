@@ -24,8 +24,7 @@ public class CSV {
     }
 
     public CSV() {
-        this.pathToCSV = "src/main/resources/tasks.csv";
-        this.shouldWrite = true;
+        this("src/main/resources/tasks.csv", true);
     }
 
     void appendEvent(Event event) throws IOException {
