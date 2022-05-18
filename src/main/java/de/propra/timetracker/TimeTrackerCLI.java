@@ -10,8 +10,8 @@ enum CLIStatus {
 
 public class TimeTrackerCLI {
 
-    private static Options options = new Options();
-    private CSV csv;
+    private static final Options options = new Options();
+    private final CSV csv;
 
     public TimeTrackerCLI(CSV csv) {
         this.csv = csv;
@@ -36,7 +36,7 @@ public class TimeTrackerCLI {
         options.addOption(newEntryOption);
 
         CommandLineParser parser = new DefaultParser();
-        CommandLine cmd = null;
+        CommandLine cmd;
 
         try {
             cmd = parser.parse(options, args);
