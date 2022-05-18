@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class CSV {
@@ -15,6 +16,9 @@ public class CSV {
             .setHeader(Spalten.class)
             .setSkipHeaderRecord(true)
             .build();
+    private static final String DEFAULT_PATH_TO_TASKS =
+            String.valueOf(Paths.get(System.getProperty("user.home"), ".config", "time-tracker", "tasks.csv"));
+
     private final String pathToCSV;
     private final boolean shouldWrite;
 
@@ -24,7 +28,7 @@ public class CSV {
     }
 
     public CSV() {
-        this("src/main/resources/tasks.csv", true);
+        this(DEFAULT_PATH_TO_TASKS, true);
     }
 
     void appendEvent(Event event) throws IOException {
