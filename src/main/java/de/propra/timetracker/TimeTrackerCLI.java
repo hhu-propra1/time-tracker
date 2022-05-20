@@ -51,7 +51,7 @@ public class TimeTrackerCLI {
                 csv.appendRow(event.asList());
                 return CLIStatus.ADD_ENTRY;
 			} else if (cmd.hasOption("t")) {
-				//todo: print table
+				TablePrinter.printTable(csv.readCSV());
 				return CLIStatus.SHOW_TABLE;
 			}
         } catch (ParseException e) {
