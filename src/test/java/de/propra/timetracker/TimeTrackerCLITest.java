@@ -51,4 +51,11 @@ class TimeTrackerCLITest {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(arguments);
         assertThat(cliStatus).isEqualTo(CLIStatus.ADD_ENTRY);
     }
+
+	@Test
+	@DisplayName("--table gibt alle Einträge in einer Tabelle aus.")
+	void readCLI5() throws IOException {
+		CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--table"});
+		assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
+	}
 }

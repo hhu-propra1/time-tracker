@@ -5,7 +5,7 @@ import org.apache.commons.cli.*;
 import java.io.IOException;
 
 enum CLIStatus {
-    HELP, SUM_MINUTES, ADD_ENTRY, ERROR
+    HELP, SUM_MINUTES, ADD_ENTRY, ERROR, SHOW_TABLE
 }
 
 public class TimeTrackerCLI {
@@ -30,6 +30,7 @@ public class TimeTrackerCLI {
     CLIStatus readCLI(String[] args) throws IOException {
         options.addOption("h", "help", false, "Zeige diese Hilfe an");
         options.addOption("s", "sum", false, "Summiere eingegebene Einträge");
+        options.addOption("t", "table", false, "Zeige Tabelle aller Einträge");
         Option newEntryOption = new Option("a", "add", true, "Füge neuen Eintrag in die Datenbank hinzu");
         newEntryOption.setArgs(4);
         newEntryOption.setValueSeparator(',');
@@ -49,7 +50,10 @@ public class TimeTrackerCLI {
                 Event event = new Event(optionValues[0], Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
                 csv.appendRow(event.asList());
                 return CLIStatus.ADD_ENTRY;
-            }
+			} else if (cmd.hasOption("t")) {
+				//todo: print table
+				return CLIStatus.SHOW_TABLE;
+			}
         } catch (ParseException e) {
             hilfe();
             return CLIStatus.ERROR;
