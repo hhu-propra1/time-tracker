@@ -2,22 +2,22 @@
 The time-tracker is a nifty little tool to track the time you spent on your courses.
 
 
- ## Why does the time-tracker exist?
- This project was created as part of a live stream, to give students an insight into working with Git and more.
+## Why does the time-tracker exist?
+This project was created as part of a live stream, to give students an insight into working with Git and more.
 
 
- ## How do I use the time-tracker?
- First you have to create a shadow jar with the imported gradle plugin via tasks > shadow > shadowJar.
+## How do I use the time-tracker?
+First you have to create a shadow jar with the imported gradle plugin via tasks > shadow > shadowJar.
 
- After that you direct your terminal to the directory of the shadow jar (it's in time-tracker/build/libs by default) and use the time-tracker with the following commands.
+After that you direct your terminal to the directory of the shadow jar (it's in time-tracker/build/libs by default) and use the time-tracker with the following commands.
 
- To add an entry to your tracked events, use
+To add an entry to your tracked events, use
 
- `java -jar SHADOW_JAR_FILE_NAME.jar -a <YYYY-MM-DD>,<minutes>,<course>,"<description>"`
+`java -jar SHADOW_JAR_FILE_NAME.jar -a <YYYY-MM-DD>,<minutes>,<course>,"<description>"`
  
- To sum all the time spent with those events and print it to the console, use
+To sum all the time spent with those events and print it to the console, use
 
- `java -jar SHADOW_JAR_FILE_NAME.jar -s`
+`java -jar SHADOW_JAR_FILE_NAME.jar -s`
 
 
 ## How do I contribute?
