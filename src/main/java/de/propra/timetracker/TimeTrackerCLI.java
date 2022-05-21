@@ -50,10 +50,10 @@ public class TimeTrackerCLI {
                 Event event = new Event(optionValues[0], Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
                 csv.appendRow(event.asList());
                 return CLIStatus.ADD_ENTRY;
-			} else if (cmd.hasOption("t")) {
-				TablePrinter.printTable(csv.readCSV());
-				return CLIStatus.SHOW_TABLE;
-			}
+            } else if (cmd.hasOption("t")) {
+                TablePrinter.printTable(csv.readCSV());
+                return CLIStatus.SHOW_TABLE;
+            }
         } catch (ParseException e) {
             hilfe();
             return CLIStatus.ERROR;
