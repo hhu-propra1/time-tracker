@@ -9,10 +9,10 @@ public class Calculations {
                 .sum();
     }
 
-	static int sumMinutesOfProjekt(List<Event> events, String projekt) {
-		return events.stream()
-				.filter(e -> e.projekt().equals(projekt))
-				.mapToInt(Event::minuten)
-				.sum();
-	}
+    static int sumMinutesOfProjekt(List<Event> events, String projekt) {
+        return events.stream()
+                .filter(e -> e.projekt().equals(projekt))
+                .mapToInt(Event::minuten)
+                .sum();
+    }
 }
