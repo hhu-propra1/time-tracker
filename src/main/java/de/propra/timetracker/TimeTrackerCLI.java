@@ -36,7 +36,6 @@ public class TimeTrackerCLI {
 		addOption.setValueSeparator(',');
 		options.addOption(addOption);
 		Option sumOption = new Option("sof", "sumof", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
-		sumOption.setArgs(1);
 		options.addOption(sumOption);
 
 
