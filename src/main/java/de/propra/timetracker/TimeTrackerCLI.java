@@ -49,7 +49,7 @@ public class TimeTrackerCLI {
                 System.out.printf("Summe: %d Minuten", minutes);
                 return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("sumof")) {
-                String projekt = cmd.getOptionValue("sof");
+                String projekt = cmd.getOptionValue("sumof");
                 int minutes = Calculations.sumMinutesOfProjekt(csv.readCSV(), projekt);
                 System.out.printf("Summe: %d Minuten in %s", minutes, projekt);
                 return CLIStatus.SUM_MINUTES;
