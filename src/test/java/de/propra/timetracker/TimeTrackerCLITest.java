@@ -42,6 +42,13 @@ class TimeTrackerCLITest {
     }
 
     @Test
+    @DisplayName("--sumof summiert alle Einträge eines bestimmten events und gibt sie aus.")
+    void readCLI6() throws IOException {
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--sumof", "projektname"});
+        assertThat(cliStatus).isEqualTo(CLIStatus.SUM_MINUTES);
+    }
+
+    @Test
     @DisplayName("--add fügt neuen Eintrag hinzu.")
     void readCLI4() throws IOException {
         String[] arguments = {
@@ -52,10 +59,10 @@ class TimeTrackerCLITest {
         assertThat(cliStatus).isEqualTo(CLIStatus.ADD_ENTRY);
     }
 
-	@Test
-	@DisplayName("--table gibt alle Einträge in einer Tabelle aus.")
-	void readCLI5() throws IOException {
-		CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--table"});
-		assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
-	}
+    @Test
+    @DisplayName("--table gibt alle Einträge in einer Tabelle aus.")
+    void readCLI5() throws IOException {
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--table"});
+        assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
+    }
 }

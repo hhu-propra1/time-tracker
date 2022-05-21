@@ -31,10 +31,13 @@ public class TimeTrackerCLI {
         options.addOption("h", "help", false, "Zeige diese Hilfe an");
         options.addOption("s", "sum", false, "Summiere eingegebene Einträge");
         options.addOption("t", "table", false, "Zeige Tabelle aller Einträge");
-        Option newEntryOption = new Option("a", "add", true, "Füge neuen Eintrag in die Datenbank hinzu");
-        newEntryOption.setArgs(4);
-        newEntryOption.setValueSeparator(',');
-        options.addOption(newEntryOption);
+        Option addOption = new Option("a", "add", true, "Füge neuen Eintrag in die Datenbank hinzu");
+        addOption.setArgs(4);
+        addOption.setValueSeparator(',');
+        options.addOption(addOption);
+        Option sumOption = new Option(null, "sumof", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
+        options.addOption(sumOption);
+
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd;
@@ -45,15 +48,20 @@ public class TimeTrackerCLI {
                 int minutes = Calculations.sumMinutes(csv.readCSV());
                 System.out.printf("Summe: %d Minuten", minutes);
                 return CLIStatus.SUM_MINUTES;
+            } else if (cmd.hasOption("sumof")) {
+                String projekt = cmd.getOptionValue("sumof");
+                int minutes = Calculations.sumMinutesOfProjekt(csv.readCSV(), projekt);
+                System.out.printf("Summe: %d Minuten in %s", minutes, projekt);
+                return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("a")) {
                 String[] optionValues = cmd.getOptionValues("a");
                 Event event = new Event(optionValues[0], Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
                 csv.appendRow(event.asList());
                 return CLIStatus.ADD_ENTRY;
-			} else if (cmd.hasOption("t")) {
-				TablePrinter.printTable(csv.readCSV());
-				return CLIStatus.SHOW_TABLE;
-			}
+            } else if (cmd.hasOption("t")) {
+                TablePrinter.printTable(csv.readCSV());
+                return CLIStatus.SHOW_TABLE;
+            }
         } catch (ParseException e) {
             hilfe();
             return CLIStatus.ERROR;
