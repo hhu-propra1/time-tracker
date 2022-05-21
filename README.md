@@ -25,7 +25,7 @@ To get help, wirh all function that u can use, use
 
 To print all entrys to the console as table, use
 
-`java -jar SHADOW_JAR_FILE_NAME.jar --table`
+`java -jar SHADOW_JAR_FILE_NAME.jar -t`
 
 
 ## How do I contribute?
