@@ -35,7 +35,7 @@ public class TimeTrackerCLI {
         addOption.setArgs(4);
 		addOption.setValueSeparator(',');
 		options.addOption(addOption);
-		Option sumOption = new Option("sof", "sumof", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
+		Option sumOption = new Option(null, "sumof", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
 		options.addOption(sumOption);
 
 
@@ -48,7 +48,7 @@ public class TimeTrackerCLI {
 				int minutes = Calculations.sumMinutes(csv.readCSV());
 				System.out.printf("Summe: %d Minuten", minutes);
 				return CLIStatus.SUM_MINUTES;
-			} else if (cmd.hasOption("sof")) {
+			} else if (cmd.hasOption("sumof")) {
 				String projekt = cmd.getOptionValue("sof");
 				int minutes = Calculations.sumMinutesOfProjekt(csv.readCSV(), projekt);
 				System.out.printf("Summe: %d Minuten in %s", minutes, projekt);
