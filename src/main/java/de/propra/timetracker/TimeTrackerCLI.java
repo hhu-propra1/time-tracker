@@ -45,23 +45,23 @@ public class TimeTrackerCLI {
         try {
             cmd = parser.parse(options, args);
             if (cmd.hasOption("s")) {
-				int minutes = Calculations.sumMinutes(csv.readCSV());
-				System.out.printf("Summe: %d Minuten", minutes);
-				return CLIStatus.SUM_MINUTES;
-			} else if (cmd.hasOption("sumof")) {
-				String projekt = cmd.getOptionValue("sof");
-				int minutes = Calculations.sumMinutesOfProjekt(csv.readCSV(), projekt);
-				System.out.printf("Summe: %d Minuten in %s", minutes, projekt);
-				return CLIStatus.SUM_MINUTES;
+                int minutes = Calculations.sumMinutes(csv.readCSV());
+                System.out.printf("Summe: %d Minuten", minutes);
+                return CLIStatus.SUM_MINUTES;
+            } else if (cmd.hasOption("sumof")) {
+                String projekt = cmd.getOptionValue("sof");
+                int minutes = Calculations.sumMinutesOfProjekt(csv.readCSV(), projekt);
+                System.out.printf("Summe: %d Minuten in %s", minutes, projekt);
+                return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("a")) {
                 String[] optionValues = cmd.getOptionValues("a");
                 Event event = new Event(optionValues[0], Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
                 csv.appendRow(event.asList());
                 return CLIStatus.ADD_ENTRY;
-			} else if (cmd.hasOption("t")) {
-				TablePrinter.printTable(csv.readCSV());
-				return CLIStatus.SHOW_TABLE;
-			}
+            } else if (cmd.hasOption("t")) {
+                TablePrinter.printTable(csv.readCSV());
+                return CLIStatus.SHOW_TABLE;
+            }
         } catch (ParseException e) {
             hilfe();
             return CLIStatus.ERROR;

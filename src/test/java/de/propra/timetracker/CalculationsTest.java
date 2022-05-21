@@ -34,11 +34,11 @@ class CalculationsTest {
         assertThat(sumMinutes(events)).isEqualTo(60);
     }
 
-	@Test
-	@DisplayName("Sum of events with same name.")
-	void test4() {
-		Event event = new Event("2022-05-04", 30, "ProPra1", "Events schreiben implementieren");
-		List<Event> events = List.of(event, event);
-		assertThat(sumMinutesOfProjekt(events, "ProPra1")).isEqualTo(60);
-	}
+    @Test
+    @DisplayName("Sum of events with same name.")
+    void test4() {
+        Event event = new Event("2022-05-04", 30, "ProPra1", "Events schreiben implementieren");
+        List<Event> events = List.of(event, event);
+        assertThat(sumMinutesOfProjekt(events, "ProPra1")).isEqualTo(60);
+    }
 }
