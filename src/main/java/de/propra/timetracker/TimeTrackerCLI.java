@@ -31,10 +31,14 @@ public class TimeTrackerCLI {
         options.addOption("h", "help", false, "Zeige diese Hilfe an");
         options.addOption("s", "sum", false, "Summiere eingegebene Einträge");
         options.addOption("t", "table", false, "Zeige Tabelle aller Einträge");
-        Option newEntryOption = new Option("a", "add", true, "Füge neuen Eintrag in die Datenbank hinzu");
-        newEntryOption.setArgs(4);
-        newEntryOption.setValueSeparator(',');
-        options.addOption(newEntryOption);
+        Option addOption = new Option("a", "add", true, "Füge neuen Eintrag in die Datenbank hinzu");
+        addOption.setArgs(4);
+		addOption.setValueSeparator(',');
+		options.addOption(addOption);
+		Option sumOption = new Option("sof", "sumof", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
+		sumOption.setArgs(1);
+		options.addOption(sumOption);
+
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd;
@@ -42,9 +46,14 @@ public class TimeTrackerCLI {
         try {
             cmd = parser.parse(options, args);
             if (cmd.hasOption("s")) {
-                int minutes = Calculations.sumMinutes(csv.readCSV());
-                System.out.printf("Summe: %d Minuten", minutes);
-                return CLIStatus.SUM_MINUTES;
+				int minutes = Calculations.sumMinutes(csv.readCSV());
+				System.out.printf("Summe: %d Minuten", minutes);
+				return CLIStatus.SUM_MINUTES;
+			} else if (cmd.hasOption("sof")) {
+				String projekt = cmd.getOptionValue("sof");
+				int minutes = Calculations.sumMinutesOfProjekt(csv.readCSV(), projekt);
+				System.out.printf("Summe: %d Minuten in %s", minutes, projekt);
+				return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("a")) {
                 String[] optionValues = cmd.getOptionValues("a");
                 Event event = new Event(optionValues[0], Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
