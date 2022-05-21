@@ -19,6 +19,14 @@ To sum all the time spent with those events and print it to the console, use
 
 `java -jar SHADOW_JAR_FILE_NAME.jar -s`
 
+To get help, wirh all function that u can use, use
+
+`java -jar SHADOW_JAR_FILE_NAME.jar -h`
+
+To print all entrys to the console as table, use
+
+`java -jar SHADOW_JAR_FILE_NAME.jar --table`
+
 
 ## How do I contribute?
 First, please make sure to follow the [Code of Conduct](https://github.com/hhu-propra1/time-tracker/blob/main/CODE_OF_CONDUCT.md) if you want to contribute.
