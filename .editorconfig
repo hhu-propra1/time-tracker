@@ -1,0 +1,11 @@
+root = true
+
+[*]
+end_of_line = lf
+
+[*.java]
+indent_style = space
+insert_final_newline = true
+
+[*.xml]
+indent_size = 2
