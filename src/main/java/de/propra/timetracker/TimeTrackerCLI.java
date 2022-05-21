@@ -33,10 +33,10 @@ public class TimeTrackerCLI {
         options.addOption("t", "table", false, "Zeige Tabelle aller Einträge");
         Option addOption = new Option("a", "add", true, "Füge neuen Eintrag in die Datenbank hinzu");
         addOption.setArgs(4);
-		addOption.setValueSeparator(',');
-		options.addOption(addOption);
-		Option sumOption = new Option(null, "sumof", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
-		options.addOption(sumOption);
+        addOption.setValueSeparator(',');
+        options.addOption(addOption);
+        Option sumOption = new Option(null, "sumof", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
+        options.addOption(sumOption);
 
 
         CommandLineParser parser = new DefaultParser();
