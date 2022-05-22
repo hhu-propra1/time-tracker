@@ -19,7 +19,6 @@ public class TablePrinter {
                 .withAlignments(Table.ALIGN_LEFT, Table.ALIGN_LEFT, Table.ALIGN_LEFT, Table.ALIGN_LEFT)
                 .addRow("Datum", "Minuten", "Projekt", "Beschreibung");
 
-        //events.forEach(e -> tableBuilder.addRow(e.datum(),e.minuten(),e.projekt(),e.beschreibung()));
         for (Event event : events) {
             if(event.projekt().equals(projekt)){
                 tableBuilder.addRow(event.datum(),event.minuten(), event.projekt(),event.beschreibung());
