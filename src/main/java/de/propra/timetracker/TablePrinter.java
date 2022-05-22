@@ -13,4 +13,13 @@ public class TablePrinter {
         events.forEach(e -> tableBuilder.addRow(e.datum(),e.minuten(),e.projekt(),e.beschreibung()));
         System.out.println(tableBuilder.build());
     }
+
+    static void printTableOf(List<Event> events, String projekt) {
+        Table.Builder tableBuilder = new Table.Builder()
+                .withAlignments(Table.ALIGN_LEFT, Table.ALIGN_LEFT, Table.ALIGN_LEFT, Table.ALIGN_LEFT)
+                .addRow("Datum", "Minuten", "Projekt", "Beschreibung");
+
+        events.stream().filter(e -> e.projekt().equals(projekt)).forEach(e -> tableBuilder.addRow(e.datum(),e.minuten(),e.projekt(),e.beschreibung()));
+        System.out.println(tableBuilder.build());
+    }
 }
