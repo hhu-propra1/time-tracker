@@ -19,6 +19,10 @@ To sum all the time spent with those events and print it to the console, use
 
 `java -jar SHADOW_JAR_FILE_NAME.jar -s`
 
+To sum up the time spent on a particular event and print it to the console, use
+
+`java -jar SHADOW_JAR_FILE_NAME.jar --sumof <project>`
+
 To get help for all available functions, use
 
 `java -jar SHADOW_JAR_FILE_NAME.jar -h`
