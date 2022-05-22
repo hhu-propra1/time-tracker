@@ -37,6 +37,8 @@ public class TimeTrackerCLI {
         options.addOption(addOption);
         Option sumOption = new Option(null, "sumof", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
         options.addOption(sumOption);
+        Option tableOption = new Option(null, "tableof", true, "Zeige Tabelle aller Einträge eines bestimmten Projektes");
+        options.addOption(tableOption);
 
 
         CommandLineParser parser = new DefaultParser();
@@ -60,6 +62,10 @@ public class TimeTrackerCLI {
                 return CLIStatus.ADD_ENTRY;
             } else if (cmd.hasOption("t")) {
                 TablePrinter.printTable(csv.readCSV());
+                return CLIStatus.SHOW_TABLE;
+            } else if (cmd.hasOption("tableof")) {
+                String projekt = cmd.getOptionValue("tableof");
+                TablePrinter.printTableOf(csv.readCSV(),projekt);
                 return CLIStatus.SHOW_TABLE;
             }
         } catch (ParseException e) {
