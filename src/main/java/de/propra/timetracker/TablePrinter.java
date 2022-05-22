@@ -1,8 +1,6 @@
 package de.propra.timetracker;
 
 import net.steppschuh.markdowngenerator.table.Table;
-
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.List;
 
 public class TablePrinter {
