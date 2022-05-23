@@ -1,5 +1,8 @@
 package de.propra.timetracker;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Calculations {
@@ -10,18 +13,19 @@ public class Calculations {
     }
 
     static int sumMinutesOfProjekt(List<Event> events, String argument) {
-        String[] date = argument.split("");
-        if(date[4].equals("-") && date[7].equals("-") && date.length==10){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        try {
+            date = format.parse(argument);
+        } catch (ParseException e) {
             return events.stream()
-                    .filter(e -> e.datum().equals(argument))
+                    .filter(en -> en.projekt().equals(argument))
                     .mapToInt(Event::minuten)
                     .sum();
         }
-        else {
-            return events.stream()
-                    .filter(e -> e.projekt().equals(argument))
-                    .mapToInt(Event::minuten)
-                    .sum();
-        }
+        return events.stream()
+                .filter(e -> e.datum().equals(argument))
+                .mapToInt(Event::minuten)
+                .sum();
     }
 }

@@ -1,6 +1,10 @@
 package de.propra.timetracker;
 
 import net.steppschuh.markdowngenerator.table.Table;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class TablePrinter {
@@ -13,14 +17,15 @@ public class TablePrinter {
     }
 
     static void printTableOf(List<Event> events, String argument) {
-        String[] date = argument.split("");
         Table.Builder tableBuilder = getBuilder();
-        if(date[4].equals("-") && date[7].equals("-") && date.length==10){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        try {
+            date = format.parse(argument);
             events.stream().filter(e -> e.datum().equals(argument)).forEach(e -> tableBuilder.addRow(e.datum(),e.minuten(),e.projekt(),e.beschreibung()));
             System.out.println(tableBuilder.build());
-        }
-        else {
-            events.stream().filter(e -> e.projekt().equals(argument)).forEach(e -> tableBuilder.addRow(e.datum(),e.minuten(),e.projekt(),e.beschreibung()));
+        } catch (ParseException e) {
+            events.stream().filter(en -> en.projekt().equals(argument)).forEach(en -> tableBuilder.addRow(en.datum(),en.minuten(),en.projekt(),en.beschreibung()));
             System.out.println(tableBuilder.build());
         }
     }
