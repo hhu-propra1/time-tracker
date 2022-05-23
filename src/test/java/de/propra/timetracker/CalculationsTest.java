@@ -43,7 +43,7 @@ class CalculationsTest {
     }
 
     @Test
-    @DisplayName("Sum of events with same name.")
+    @DisplayName("Sum of events with same date.")
     void test5() {
         Event event1 = new Event("2022-05-10", 30, "ProPra1", "Events schreiben implementieren");
         Event event2 = new Event("2022-05-10", 30, "ProPra2", "Events schreiben implementieren");
