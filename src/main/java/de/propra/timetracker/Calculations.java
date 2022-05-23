@@ -10,7 +10,6 @@ public class Calculations {
     }
 
     static int sumMinutesOfProjekt(List<Event> events, String argument) {
-        //YYYY-MM-DD l=10 -5,8
         String[] date = argument.split("");
         if(date[4].equals("-") && date[7].equals("-") /*&& date.length==10*/){
             return events.stream()
