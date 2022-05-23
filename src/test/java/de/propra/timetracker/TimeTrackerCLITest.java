@@ -72,4 +72,11 @@ class TimeTrackerCLITest {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--tableof", "projektname"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
     }
+
+    @Test
+    @DisplayName("--tableof gibt alle Einträge eines Datums in einer Tabelle aus.")
+    void readCLI8() throws IOException {
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--tableof", "yyyy-mm-dd"});
+        assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
+    }
 }
