@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Bilde Summe von  Datum" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="de.propra.timetracker.TimeTrackerCLI" />
+    <module name="time-tracker.main" />
+    <option name="PROGRAM_PARAMETERS" value="--sumof 2022-05-18" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="de.propra.timetracker.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
