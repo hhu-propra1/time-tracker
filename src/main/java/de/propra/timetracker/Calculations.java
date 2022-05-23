@@ -9,10 +9,20 @@ public class Calculations {
                 .sum();
     }
 
-    static int sumMinutesOfProjekt(List<Event> events, String projekt) {
-        return events.stream()
-                .filter(e -> e.projekt().equals(projekt))
-                .mapToInt(Event::minuten)
-                .sum();
+    static int sumMinutesOfProjekt(List<Event> events, String argument) {
+        //YYYY-MM-DD l=10 -5,8
+        String[] date = argument.split("");
+        if(date[4].equals("-") && date[7].equals("-") /*&& date.length==10*/){
+            return events.stream()
+                    .filter(e -> e.datum().equals(argument))
+                    .mapToInt(Event::minuten)
+                    .sum();
+        }
+        else {
+            return events.stream()
+                    .filter(e -> e.projekt().equals(argument))
+                    .mapToInt(Event::minuten)
+                    .sum();
+        }
     }
 }
