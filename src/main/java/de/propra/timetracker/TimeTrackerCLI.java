@@ -35,13 +35,13 @@ public class TimeTrackerCLI {
         addOption.setArgs(4);
         addOption.setValueSeparator(',');
         options.addOption(addOption);
-        Option sumOption = new Option(null, "sumof", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
+        Option sumOption = new Option(null, "sum-of-project", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
         options.addOption(sumOption);
-        Option sumOptionDate = new Option(null, "sumofd", true, "Summiere eingegebene Einträge eines bestimmten Datums");
+        Option sumOptionDate = new Option(null, "sum-of-date", true, "Summiere eingegebene Einträge eines bestimmten Datums");
         options.addOption(sumOptionDate);
-        Option tableOption = new Option(null, "tableof", true, "Zeige Tabelle aller Einträge eines bestimmten Projektes");
+        Option tableOption = new Option(null, "table-of-project", true, "Zeige Tabelle aller Einträge eines bestimmten Projektes");
         options.addOption(tableOption);
-        Option tableOptionDate = new Option(null, "tableofd", true, "Zeige Tabelle aller Einträge eines bestimmten Datums");
+        Option tableOptionDate = new Option(null, "table-of-date", true, "Zeige Tabelle aller Einträge eines bestimmten Datums");
         options.addOption(tableOptionDate);
 
 
@@ -54,13 +54,13 @@ public class TimeTrackerCLI {
                 int minutes = Calculations.sumMinutes(csv.readCSV());
                 System.out.printf("Summe: %d Minuten", minutes);
                 return CLIStatus.SUM_MINUTES;
-            } else if (cmd.hasOption("sumof")) {
-                String projekt = cmd.getOptionValue("sumof");
+            } else if (cmd.hasOption("sum-of-project")) {
+                String projekt = cmd.getOptionValue("sum-of-project");
                 int minutes = Calculations.sumMinutesOfProjekt(csv.readCSV(), projekt);
                 System.out.printf("Summe: %d Minuten in %s", minutes, projekt);
                 return CLIStatus.SUM_MINUTES;
-            } else if (cmd.hasOption("sumofd")) {
-                String datum = cmd.getOptionValue("sumofd");
+            } else if (cmd.hasOption("sum-of-date")) {
+                String datum = cmd.getOptionValue("sum-of-date");
                 int minutes = Calculations.sumMinutesOfDate(csv.readCSV(), datum);
                 System.out.printf("Summe: %d Minuten am %s", minutes, datum);
                 return CLIStatus.SUM_MINUTES;
@@ -72,12 +72,12 @@ public class TimeTrackerCLI {
             } else if (cmd.hasOption("t")) {
                 TablePrinter.printTable(csv.readCSV());
                 return CLIStatus.SHOW_TABLE;
-            } else if (cmd.hasOption("tableof")) {
-                String projekt = cmd.getOptionValue("tableof");
+            } else if (cmd.hasOption("table-of-project")) {
+                String projekt = cmd.getOptionValue("table-of-project");
                 TablePrinter.printTableOfProject(csv.readCSV(),projekt);
                 return CLIStatus.SHOW_TABLE;
-            } else if (cmd.hasOption("tableofd")) {
-                String datum = cmd.getOptionValue("tableofd");
+            } else if (cmd.hasOption("table-of-date")) {
+                String datum = cmd.getOptionValue("table-of-date");
                 TablePrinter.printTableOfDate(csv.readCSV(),datum);
                 return CLIStatus.SHOW_TABLE;
             }
