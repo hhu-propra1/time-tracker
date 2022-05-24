@@ -42,9 +42,16 @@ class TimeTrackerCLITest {
     }
 
     @Test
-    @DisplayName("--sumof summiert alle Einträge eines bestimmten events und gibt sie aus.")
+    @DisplayName("--sum-of-project summiert alle Einträge eines bestimmten events und gibt sie aus.")
     void readCLI6() throws IOException {
-        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--sumof", "projektname"});
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--sum-of-project", "projektname"});
+        assertThat(cliStatus).isEqualTo(CLIStatus.SUM_MINUTES);
+    }
+
+    @Test
+    @DisplayName("--sum-of-date summiert alle Einträge eines bestimmten events und gibt sie aus.")
+    void readCLI9() throws IOException {
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--sum-of-date", "2022-05-10"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SUM_MINUTES);
     }
 
@@ -67,9 +74,16 @@ class TimeTrackerCLITest {
     }
 
     @Test
-    @DisplayName("--tableof gibt alle Einträge eines Projekts in einer Tabelle aus.")
+    @DisplayName("--table-of-project gibt alle Einträge eines Projekts in einer Tabelle aus.")
     void readCLI7() throws IOException {
-        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--tableof", "projektname"});
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--table-of-project", "projektname"});
+        assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
+    }
+
+    @Test
+    @DisplayName("--table-of-date gibt alle Einträge eines Datums in einer Tabelle aus.")
+    void readCLI8() throws IOException {
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--table-of-date", "2022-05-10"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
     }
 }

@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static de.propra.timetracker.Calculations.sumMinutes;
-import static de.propra.timetracker.Calculations.sumMinutesOfProjekt;
+import static de.propra.timetracker.Calculations.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculationsTest {
@@ -40,5 +39,14 @@ class CalculationsTest {
         Event event = new Event("2022-05-04", 30, "ProPra1", "Events schreiben implementieren");
         List<Event> events = List.of(event, event);
         assertThat(sumMinutesOfProjekt(events, "ProPra1")).isEqualTo(60);
+    }
+
+    @Test
+    @DisplayName("Sum of events with same date.")
+    void test5() {
+        Event event1 = new Event("2022-05-10", 30, "ProPra1", "Events schreiben implementieren");
+        Event event2 = new Event("2022-05-10", 30, "ProPra2", "Events schreiben implementieren");
+        List<Event> events = List.of(event1, event2);
+        assertThat(sumMinutesOfDate(events, "2022-05-10")).isEqualTo(60);
     }
 }
