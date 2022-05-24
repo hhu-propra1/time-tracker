@@ -37,6 +37,8 @@ public class TimeTrackerCLI {
         options.addOption(addOption);
         Option sumOption = new Option(null, "sumof", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
         options.addOption(sumOption);
+        Option sumOptionDate = new Option(null, "sumofd", true, "Summiere eingegebene Einträge eines bestimmten Datums");
+        options.addOption(sumOptionDate);
         Option tableOption = new Option(null, "tableof", true, "Zeige Tabelle aller Einträge eines bestimmten Projektes");
         options.addOption(tableOption);
 
@@ -54,6 +56,11 @@ public class TimeTrackerCLI {
                 String projekt = cmd.getOptionValue("sumof");
                 int minutes = Calculations.sumMinutesOfProjekt(csv.readCSV(), projekt);
                 System.out.printf("Summe: %d Minuten in %s", minutes, projekt);
+                return CLIStatus.SUM_MINUTES;
+            } else if (cmd.hasOption("sumofd")) {
+                String datum = cmd.getOptionValue("sumofd");
+                int minutes = Calculations.sumMinutesOfDate(csv.readCSV(), datum);
+                System.out.printf("Summe: %d Minuten am %s", minutes, datum);
                 return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("a")) {
                 String[] optionValues = cmd.getOptionValues("a");
