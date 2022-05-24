@@ -41,6 +41,8 @@ public class TimeTrackerCLI {
         options.addOption(sumOptionDate);
         Option tableOption = new Option(null, "tableof", true, "Zeige Tabelle aller Einträge eines bestimmten Projektes");
         options.addOption(tableOption);
+        Option tableOptionDate = new Option(null, "tableofd", true, "Zeige Tabelle aller Einträge eines bestimmten Datums");
+        options.addOption(tableOptionDate);
 
 
         CommandLineParser parser = new DefaultParser();
@@ -72,7 +74,11 @@ public class TimeTrackerCLI {
                 return CLIStatus.SHOW_TABLE;
             } else if (cmd.hasOption("tableof")) {
                 String projekt = cmd.getOptionValue("tableof");
-                TablePrinter.printTableOf(csv.readCSV(),projekt);
+                TablePrinter.printTableOfProject(csv.readCSV(),projekt);
+                return CLIStatus.SHOW_TABLE;
+            } else if (cmd.hasOption("tableofd")) {
+                String datum = cmd.getOptionValue("tableofd");
+                TablePrinter.printTableOfDate(csv.readCSV(),datum);
                 return CLIStatus.SHOW_TABLE;
             }
         } catch (ParseException e) {
