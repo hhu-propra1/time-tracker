@@ -10,30 +10,40 @@ import java.util.List;
 public class TablePrinter {
 
     static void printTable(List<Event> events) {
-        Table.Builder tableBuilder = getBuilder();
+        Table.Builder tableBuilder = header();
 
         events.forEach(e -> tableBuilder.addRow(e.datum(),e.minuten(),e.projekt(),e.beschreibung()));
         System.out.println(tableBuilder.build());
     }
 
-    static void printTableOf(List<Event> events, String argument) {
-        Table.Builder tableBuilder = getBuilder();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date;
-        try {
-            date = format.parse(argument);
-            events.stream().filter(e -> e.datum().equals(argument)).forEach(e -> tableBuilder.addRow(e.datum(),e.minuten(),e.projekt(),e.beschreibung()));
-            System.out.println(tableBuilder.build());
-        } catch (ParseException e) {
-            events.stream().filter(en -> en.projekt().equals(argument)).forEach(en -> tableBuilder.addRow(en.datum(),en.minuten(),en.projekt(),en.beschreibung()));
-            System.out.println(tableBuilder.build());
-        }
+    static void printTableOfProject(List<Event> events, String projekt) {
+        Table.Builder tableBuilder = header();
+        events.stream().filter(e -> e.projekt().equals(projekt))
+                .forEach(en -> tableBuilder.addRow(en.datum(),en.minuten(),en.projekt(),en.beschreibung()));
+        System.out.println(tableBuilder.build());
     }
 
-    private static Table.Builder getBuilder() {
+    static void printTableOfDate(List<Event> events, String datum) {
+        Table.Builder tableBuilder = header();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        String dateString;
+        try {
+            date = format.parse(datum);
+            dateString = format.format(date);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        events.stream().filter(d -> d.projekt().equals(dateString))
+                .forEach(d -> tableBuilder
+                        .addRow(d.datum(),d.minuten(),d.projekt(),d.beschreibung()));
+        System.out.println(tableBuilder.build());
+    }
+
+    static Table.Builder header() {
         return new Table.Builder()
                 .withAlignments(Table.ALIGN_LEFT, Table.ALIGN_LEFT, Table.ALIGN_LEFT, Table.ALIGN_LEFT)
-                .addRow("Datum", "Minuten", "Projekt", "Beschreibung");
+                .addRow((Object[]) Spalten.values());
     }
 }
 
