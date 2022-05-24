@@ -2,7 +2,7 @@
   <configuration default="false" name="Bilde Summe von Projekt" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="de.propra.timetracker.TimeTrackerCLI" />
     <module name="time-tracker.main" />
-    <option name="PROGRAM_PARAMETERS" value="--sumof ProPra1" />
+    <option name="PROGRAM_PARAMETERS" value="--sum-of-project ProPra1" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="de.propra.timetracker.*" />
