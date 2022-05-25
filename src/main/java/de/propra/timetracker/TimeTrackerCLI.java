@@ -58,7 +58,6 @@ public class TimeTrackerCLI {
             } else if (cmd.hasOption("a")) {
                 String[] optionValues = cmd.getOptionValues("a");
                 String date = optionValues[0].equals("today") ? java.time.LocalDate.now().toString() : optionValues[0];
-                System.out.println(date);
                 Event event = new Event(date, Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
                 csv.appendRow(event.asList());
                 return CLIStatus.ADD_ENTRY;
