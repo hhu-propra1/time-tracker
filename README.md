@@ -14,6 +14,8 @@ After that you direct your terminal to the directory of the shadow jar (it's in 
 To add an entry to your tracked events, use
 
 `java -jar SHADOW_JAR_FILE_NAME.jar -a <YYYY-MM-DD>,<minutes>,<project>,"<description>"`
+
+(you can type "today" instead of "YYYY-MM-DD" to use current date)
  
 To sum all the time spent with those events and print it to the console, use
 
