@@ -43,21 +43,21 @@ class TimeTrackerCLITest {
 
     @Test
     @DisplayName("--sum-of-project summiert alle Einträge eines bestimmten events und gibt sie aus.")
-    void readCLI6() throws IOException {
+    void readCLI4() throws IOException {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--sum-of-project", "projektname"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SUM_MINUTES);
     }
 
     @Test
     @DisplayName("--sum-of-date summiert alle Einträge eines bestimmten events und gibt sie aus.")
-    void readCLI9() throws IOException {
+    void readCLI5() throws IOException {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--sum-of-date", "2022-05-10"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SUM_MINUTES);
     }
 
     @Test
     @DisplayName("--add fügt neuen Eintrag hinzu.")
-    void readCLI4() throws IOException {
+    void readCLI6() throws IOException {
         String[] arguments = {
                 "--add",
                 "2022-05-11,90,ProPra1,\"Stream #4\""
@@ -68,21 +68,21 @@ class TimeTrackerCLITest {
 
     @Test
     @DisplayName("--table gibt alle Einträge in einer Tabelle aus.")
-    void readCLI5() throws IOException {
+    void readCLI7() throws IOException {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--table"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
     }
 
     @Test
     @DisplayName("--table-of-project gibt alle Einträge eines Projekts in einer Tabelle aus.")
-    void readCLI7() throws IOException {
+    void readCLI8() throws IOException {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--table-of-project", "projektname"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
     }
 
     @Test
     @DisplayName("--table-of-date gibt alle Einträge eines Datums in einer Tabelle aus.")
-    void readCLI8() throws IOException {
+    void readCLI9() throws IOException {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--table-of-date", "2022-05-10"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
     }
