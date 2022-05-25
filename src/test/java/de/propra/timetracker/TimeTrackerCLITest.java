@@ -86,4 +86,15 @@ class TimeTrackerCLITest {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--table-of-date", "2022-05-10"});
         assertThat(cliStatus).isEqualTo(CLIStatus.SHOW_TABLE);
     }
+
+    @Test
+    @DisplayName("--add today fügt neuen Eintrag hinzu.")
+    void readCLI10() throws IOException {
+        String[] arguments = {
+                "--add",
+                "today,90,ProPra1,\"Stream #4\""
+        };
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(arguments);
+        assertThat(cliStatus).isEqualTo(CLIStatus.ADD_ENTRY);
+    }
 }
