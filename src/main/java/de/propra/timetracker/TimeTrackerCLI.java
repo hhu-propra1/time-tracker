@@ -3,6 +3,7 @@ package de.propra.timetracker;
 import org.apache.commons.cli.*;
 
 import java.io.IOException;
+import java.util.Date;
 
 enum CLIStatus {
     HELP, SUM_MINUTES, ADD_ENTRY, ERROR, SHOW_TABLE
@@ -53,11 +54,12 @@ public class TimeTrackerCLI {
             } else if (cmd.hasOption("sumof")) {
                 String projekt = cmd.getOptionValue("sumof");
                 int minutes = Calculations.sumMinutesOfProjekt(csv.readCSV(), projekt);
-                System.out.printf("Summe: %d Minuten in %s", minutes, projekt);
                 return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("a")) {
                 String[] optionValues = cmd.getOptionValues("a");
-                Event event = new Event(optionValues[0], Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
+                String date = optionValues[0].equals("today") ? java.time.LocalDate.now().toString() : optionValues[0];
+                System.out.println(date);
+                Event event = new Event(date, Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
                 csv.appendRow(event.asList());
                 return CLIStatus.ADD_ENTRY;
             } else if (cmd.hasOption("t")) {
