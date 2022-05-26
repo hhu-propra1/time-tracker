@@ -66,7 +66,8 @@ public class TimeTrackerCLI {
                 return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("a")) {
                 String[] optionValues = cmd.getOptionValues("a");
-                Event event = new Event(optionValues[0], Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
+                String date = optionValues[0].equals("today") ? java.time.LocalDate.now().toString() : optionValues[0];
+                Event event = new Event(date, Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
                 csv.appendRow(event.asList());
                 return CLIStatus.ADD_ENTRY;
             } else if (cmd.hasOption("t")) {
