@@ -28,7 +28,7 @@ To sum up the time spent on a particular event and print it to the console, use
 
 To sum up the time spent on a particular event and print it to the console, use
 
-    java -jar SHADOW_JAR_FILE_NAME.jar --sum-of-date <yyyy-mm-dd>
+    java -jar SHADOW_JAR_FILE_NAME.jar --sum-of-date <YYYY-MM-DD>
 
 To get help for all available functions, use
 
@@ -44,7 +44,7 @@ To print all entries from a particular even to the console as a table, use
 
 To print all entries from a particular date to the console as a table, use
 
-    java -jar SHADOW_JAR_FILE_NAME.jar --table-of-date <yyyy-mm-dd>
+    java -jar SHADOW_JAR_FILE_NAME.jar --table-of-date <YYYY-MM-DD>
 
 ## Development
 
