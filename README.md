@@ -1,3 +1,8 @@
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/hhu-propra1/time-tracker/Gradle%20Check?label=checks)]([https://github.com/hhu-propra1/time-tracker/issues](https://github.com/hhu-propra1/time-tracker/actions))
+[![GitHub issues](https://img.shields.io/github/issues/hhu-propra1/time-tracker)](https://github.com/hhu-propra1/time-tracker/issues)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/hhu-propra1/time-tracker)
+[![GitHub license](https://img.shields.io/github/license/hhu-propra1/time-tracker)](https://github.com/hhu-propra1/time-tracker/blob/main/LICENSE)
+
 # What's the time-tracker?
 
 The time-tracker is a nifty little tool to track the time you spent on your courses.
