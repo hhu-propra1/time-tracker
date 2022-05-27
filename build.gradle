@@ -3,6 +3,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id 'application'
     id 'checkstyle'
+    id 'org.graalvm.buildtools.native' version '0.9.4'
 }
 
 group 'de.propra'
