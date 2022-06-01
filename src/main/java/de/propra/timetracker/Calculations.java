@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Calculations {
+    static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
     static int sumMinutes(List<Event> events) {
         return events.stream()
                 .mapToInt(Event::minuten)
@@ -20,12 +22,11 @@ public class Calculations {
     }
 
     static int sumMinutesOfDate(List<Event> events, String datum) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
         String dateString;
         try {
-            date = format.parse(datum);
-            dateString = format.format(date);
+            date = formatter.parse(datum);
+            dateString = formatter.format(date);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
