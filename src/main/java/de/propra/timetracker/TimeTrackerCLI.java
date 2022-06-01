@@ -4,6 +4,7 @@ import org.apache.commons.cli.*;
 
 import java.io.IOException;
 
+
 enum CLIStatus {
     HELP, SUM_MINUTES, ADD_ENTRY, ERROR, SHOW_TABLE
 }
@@ -61,13 +62,21 @@ public class TimeTrackerCLI {
                 return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("sum-of-date")) {
                 String datum = cmd.getOptionValue("sum-of-date");
+                if(!Calculations.isValidDate(datum)) {
+                    System.out.println("Ungültiges Datum");
+                    return CLIStatus.ERROR;
+                }
                 int minutes = Calculations.sumMinutesOfDate(csv.readCSV(), datum);
                 System.out.printf("Summe: %d Minuten am %s", minutes, datum);
                 return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("a")) {
                 String[] optionValues = cmd.getOptionValues("a");
-                String date = optionValues[0].equals("today") ? java.time.LocalDate.now().toString() : optionValues[0];
-                Event event = new Event(date, Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
+                String datum = optionValues[0].equals("today") ? java.time.LocalDate.now().toString() : optionValues[0];
+                if(!Calculations.isValidDate(datum)) {
+                    System.out.println("Ungültiges Datum");
+                    return CLIStatus.ERROR;
+                }
+                Event event = new Event(datum, Integer.parseInt(optionValues[1]), optionValues[2], optionValues[3]);
                 csv.appendRow(event.asList());
                 return CLIStatus.ADD_ENTRY;
             } else if (cmd.hasOption("t")) {
@@ -79,6 +88,10 @@ public class TimeTrackerCLI {
                 return CLIStatus.SHOW_TABLE;
             } else if (cmd.hasOption("table-of-date")) {
                 String datum = cmd.getOptionValue("table-of-date");
+                if(!Calculations.isValidDate(datum)) {
+                    System.out.println("Ungültiges Datum");
+                    return CLIStatus.ERROR;
+                }
                 TablePrinter.printTableOfDate(csv.readCSV(),datum);
                 return CLIStatus.SHOW_TABLE;
             }
