@@ -22,16 +22,8 @@ public class Calculations {
     }
 
     static int sumMinutesOfDate(List<Event> events, String datum) {
-        Date date;
-        String dateString;
-        try {
-            date = formatter.parse(datum);
-            dateString = formatter.format(date);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
         return events.stream()
-                .filter(e -> e.datum().equals(dateString))
+                .filter(e -> e.datum().equals(datum))
                 .mapToInt(Event::minuten)
                 .sum();
     }
