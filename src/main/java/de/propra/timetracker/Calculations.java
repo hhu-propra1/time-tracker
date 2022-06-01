@@ -35,4 +35,13 @@ public class Calculations {
                 .mapToInt(Event::minuten)
                 .sum();
     }
+
+    static boolean isValidDate(String datum) {
+        try {
+            formatter.parse(datum);
+            return true;
+        } catch (java.text.ParseException e) {
+            return false;
+        }
+    }
 }
