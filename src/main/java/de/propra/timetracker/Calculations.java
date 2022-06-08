@@ -1,10 +1,8 @@
 package de.propra.timetracker;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Calculations {
-    static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     static int sumMinutes(List<Event> events) {
         return events.stream()
