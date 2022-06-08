@@ -53,14 +53,14 @@ class CalculationsTest {
     @Test
     @DisplayName("2022-05-02 is a valid date")
     void test6() {
-        boolean valid = Calculations.isValidDate("2022-05-02");
+        boolean valid = CheckDate.isValidDate("2022-05-02");
         assertThat(valid).isTrue();
     }
 
     @Test
     @DisplayName("02.05.2022 is not a valid date")
     void test7() {
-        boolean valid = Calculations.isValidDate("02.05.2022");
+        boolean valid = CheckDate.isValidDate("02.05.2022");
         assertThat(valid).isFalse();
     }
 }

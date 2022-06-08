@@ -1,8 +1,6 @@
 package de.propra.timetracker;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class Calculations {
@@ -28,12 +26,4 @@ public class Calculations {
                 .sum();
     }
 
-    static boolean isValidDate(String datum) {
-        try {
-            formatter.parse(datum);
-            return true;
-        } catch (java.text.ParseException e) {
-            return false;
-        }
-    }
 }

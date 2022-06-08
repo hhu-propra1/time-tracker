@@ -4,6 +4,8 @@ import org.apache.commons.cli.*;
 
 import java.io.IOException;
 
+import static de.propra.timetracker.CheckDate.*;
+
 
 enum CLIStatus {
     HELP, SUM_MINUTES, ADD_ENTRY, ERROR, SHOW_TABLE
@@ -62,7 +64,7 @@ public class TimeTrackerCLI {
                 return CLIStatus.SUM_MINUTES;
             } else if (cmd.hasOption("sum-of-date")) {
                 String datum = cmd.getOptionValue("sum-of-date");
-                if(!Calculations.isValidDate(datum)) {
+                if(!isValidDate(datum)) {
                     System.out.println("Ungültiges Datum");
                     return CLIStatus.ERROR;
                 }
@@ -72,7 +74,7 @@ public class TimeTrackerCLI {
             } else if (cmd.hasOption("a")) {
                 String[] optionValues = cmd.getOptionValues("a");
                 String datum = optionValues[0].equals("today") ? java.time.LocalDate.now().toString() : optionValues[0];
-                if(!Calculations.isValidDate(datum)) {
+                if(!isValidDate(datum)) {
                     System.out.println("Ungültiges Datum");
                     return CLIStatus.ERROR;
                 }
@@ -88,7 +90,7 @@ public class TimeTrackerCLI {
                 return CLIStatus.SHOW_TABLE;
             } else if (cmd.hasOption("table-of-date")) {
                 String datum = cmd.getOptionValue("table-of-date");
-                if(!Calculations.isValidDate(datum)) {
+                if(!isValidDate(datum)) {
                     System.out.println("Ungültiges Datum");
                     return CLIStatus.ERROR;
                 }
