@@ -12,9 +12,9 @@ public class Tracking {
     static Event stop(String description) {
         long endMinutes = TimeUnit.MILLISECONDS.toMinutes(System.currentTimeMillis());
         List<String> lines = TempFile.read();
-        String date = lines.get(1);
-        String project = lines.get(0);
-        long startMinutes = Long.parseLong(lines.get(2));
+        String date = lines.get(0);
+        String project = lines.get(2);
+        long startMinutes = Long.parseLong(lines.get(1));
         int min = (int) (endMinutes - startMinutes);
         return new Event(date, min, project, description);
     }
