@@ -8,7 +8,7 @@ import static de.propra.timetracker.CheckDate.*;
 
 
 enum CLIStatus {
-    HELP, SUM_MINUTES, ADD_ENTRY, ERROR, SHOW_TABLE
+    HELP, SUM_MINUTES, ADD_ENTRY, ERROR, SHOW_TABLE, START, STOP
 }
 
 public class TimeTrackerCLI {
@@ -46,6 +46,10 @@ public class TimeTrackerCLI {
         options.addOption(tableOption);
         Option tableOptionDate = new Option(null, "table-of-date", true, "Zeige Tabelle aller Einträge eines bestimmten Datums");
         options.addOption(tableOptionDate);
+        Option trackStart = new Option(null, "start", true, "Starte automatisches Tracking");
+        options.addOption(trackStart);
+        Option trackStop = new Option(null, "stop", true, "Beende automatisches Tracking");
+        options.addOption(trackStop);
 
 
         CommandLineParser parser = new DefaultParser();
@@ -96,6 +100,15 @@ public class TimeTrackerCLI {
                 }
                 TablePrinter.printTableOfDate(csv.readCSV(),datum);
                 return CLIStatus.SHOW_TABLE;
+            } else if (cmd.hasOption("start")) {
+                String project = cmd.getOptionValue("start");
+                Tracking.start(project);
+                return CLIStatus.START;
+            } else if (cmd.hasOption("stop")) {
+                String description = cmd.getOptionValue("stop");
+                Event event =Tracking.stop(description);
+                csv.appendRow(event.asList());
+                return CLIStatus.STOP;
             }
         } catch (ParseException e) {
             hilfe();
