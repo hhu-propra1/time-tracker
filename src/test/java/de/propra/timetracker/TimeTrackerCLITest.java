@@ -130,12 +130,12 @@ class TimeTrackerCLITest {
                 "--start",
                 "propar1"
         };
-        String[] arguments_b = {
+        String[] argumentsStop = {
                 "--stop",
                 "test"
         };
         CLIStatus cliStatusStart = timeTrackerCLI.readCLI(argumentsStart);
-        CLIStatus cliStatusStop = timeTrackerCLI.readCLI(arguments_b);
+        CLIStatus cliStatusStop = timeTrackerCLI.readCLI(argumentsStop);
         assertThat(cliStatusStart).isEqualTo(CLIStatus.START);
         assertThat(cliStatusStop).isEqualTo(CLIStatus.STOP);
     }
