@@ -51,6 +51,14 @@ To print all entries from a particular date to the console as a table, use
 
     java -jar SHADOW_JAR_FILE_NAME.jar --table-of-date <YYYY-MM-DD>
 
+To start tracking your current time, use
+
+    java -jar SHADOW_JAR_FILE_NAME.jar --start <project>
+
+To stop tracking your current time, use
+
+    java -jar SHADOW_JAR_FILE_NAME.jar --stop <description>
+
 ## Development
 
 This is a gradle project. Check out the repository and configure it in your IDE as a gradle project. We are using the latest LTS JDK, which is currently version 17.
