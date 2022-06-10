@@ -49,4 +49,18 @@ class CalculationsTest {
         List<Event> events = List.of(event1, event2);
         assertThat(sumMinutesOfDate(events, "2022-05-10")).isEqualTo(60);
     }
+
+    @Test
+    @DisplayName("2022-05-02 is a valid date")
+    void test6() {
+        boolean valid = CheckDate.isValidDate("2022-05-02");
+        assertThat(valid).isTrue();
+    }
+
+    @Test
+    @DisplayName("02.05.2022 is not a valid date")
+    void test7() {
+        boolean valid = CheckDate.isValidDate("02.05.2022");
+        assertThat(valid).isFalse();
+    }
 }

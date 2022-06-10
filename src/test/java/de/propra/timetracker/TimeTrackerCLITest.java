@@ -97,4 +97,29 @@ class TimeTrackerCLITest {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(arguments);
         assertThat(cliStatus).isEqualTo(CLIStatus.ADD_ENTRY);
     }
+
+    @Test
+    @DisplayName("--table-of-date 22.02.2022 gibt ERROR zurück")
+    void readCLI11() throws IOException {
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--table-of-date", "22.02.2022"});
+        assertThat(cliStatus).isEqualTo(CLIStatus.ERROR);
+    }
+
+    @Test
+    @DisplayName("--sum-of-date 22.02.2022 gibt ERROR zurück")
+    void readCLI12() throws IOException {
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(new String[]{"--sum-of-date", "22.02.2022"});
+        assertThat(cliStatus).isEqualTo(CLIStatus.ERROR);
+    }
+
+    @Test
+    @DisplayName("--add 22.02.2022 gibt ERROR zurück")
+    void readCLI13() throws IOException {
+        String[] arguments = {
+                "--add",
+                "22.02.2022,90,ProPra1,\"Stream #4\""
+        };
+        CLIStatus cliStatus = timeTrackerCLI.readCLI(arguments);
+        assertThat(cliStatus).isEqualTo(CLIStatus.ERROR);
+    }
 }
