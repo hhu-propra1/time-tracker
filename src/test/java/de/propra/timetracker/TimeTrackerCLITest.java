@@ -128,11 +128,11 @@ class TimeTrackerCLITest {
     void readCLI14() throws IOException {
         String[] argumentsStart = {
                 "--start",
-                "propar1"
+                "ProPra1"
         };
         String[] argumentsStop = {
                 "--stop",
-                "test"
+                "Test"
         };
         CLIStatus cliStatusStart = timeTrackerCLI.readCLI(argumentsStart);
         CLIStatus cliStatusStop = timeTrackerCLI.readCLI(argumentsStop);
