@@ -16,7 +16,7 @@ class TempFileTest {
     @DisplayName("Test Write and Read")
     void test() {
 
-        String project = "Propar1";
+        String project = "ProPra1";
         String date = LocalDate.now().toString();
         long minutes = TimeUnit.MILLISECONDS.toMinutes(System.currentTimeMillis());
         List<String> list;

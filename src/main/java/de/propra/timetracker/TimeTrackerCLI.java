@@ -106,7 +106,7 @@ public class TimeTrackerCLI {
                 return CLIStatus.START;
             } else if (cmd.hasOption("stop")) {
                 String description = cmd.getOptionValue("stop");
-                Event event =Tracking.stop(description);
+                Event event = Tracking.stop(description);
                 csv.appendRow(event.asList());
                 return CLIStatus.STOP;
             }
