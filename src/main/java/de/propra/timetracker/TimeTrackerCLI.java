@@ -37,6 +37,7 @@ public class TimeTrackerCLI {
         Option addOption = new Option("a", "add", true, "Füge neuen Eintrag in die Datenbank hinzu. *(oder <today> anstatt von <YYYY-MM-DD> und das Datum wird automatisch ermittelt.)");
         addOption.setArgs(4);
         addOption.setArgName("YYYY-MM-DD*>,<min>,<project>,<\"description\"");
+        addOption.setValueSeparator(',');
         options.addOption(addOption);
         Option sumOption = new Option(null, "sum-of-project", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
         sumOption.setArgName("project");
