@@ -8,7 +8,7 @@ import static de.propra.timetracker.CheckDate.*;
 
 
 enum CLIStatus {
-    HELP, SUM_MINUTES, ADD_ENTRY, ERROR, SHOW_TABLE
+    HELP, SUM_MINUTES, ADD_ENTRY, ERROR, SHOW_TABLE, START, STOP
 }
 
 public class TimeTrackerCLI {
@@ -34,18 +34,29 @@ public class TimeTrackerCLI {
         options.addOption("h", "help", false, "Zeige diese Hilfe an");
         options.addOption("s", "sum", false, "Summiere eingegebene Einträge");
         options.addOption("t", "table", false, "Zeige Tabelle aller Einträge");
-        Option addOption = new Option("a", "add", true, "Füge neuen Eintrag in die Datenbank hinzu");
+        Option addOption = new Option("a", "add", true, "Füge neuen Eintrag in die Datenbank hinzu. *(oder <today> anstatt von <YYYY-MM-DD> und das Datum wird automatisch ermittelt.)");
         addOption.setArgs(4);
+        addOption.setArgName("YYYY-MM-DD*>,<min>,<project>,<\"description\"");
         addOption.setValueSeparator(',');
         options.addOption(addOption);
         Option sumOption = new Option(null, "sum-of-project", true, "Summiere eingegebene Einträge eines bestimmten Projektes");
+        sumOption.setArgName("project");
         options.addOption(sumOption);
         Option sumOptionDate = new Option(null, "sum-of-date", true, "Summiere eingegebene Einträge eines bestimmten Datums");
+        sumOptionDate.setArgName("YYYY-MM-DD");
         options.addOption(sumOptionDate);
         Option tableOption = new Option(null, "table-of-project", true, "Zeige Tabelle aller Einträge eines bestimmten Projektes");
+        tableOption.setArgName("project");
         options.addOption(tableOption);
         Option tableOptionDate = new Option(null, "table-of-date", true, "Zeige Tabelle aller Einträge eines bestimmten Datums");
+        tableOptionDate.setArgName("YYYY-MM-DD");
         options.addOption(tableOptionDate);
+        Option trackStart = new Option(null, "start", true, "Starte das automatisches Tracking der Projektzeit");
+        trackStart.setArgName("project");
+        options.addOption(trackStart);
+        Option trackStop = new Option(null, "stop", true, "Beende das automatisches Tracking der Projektzeit");
+        trackStop.setArgName("\"description\"");
+        options.addOption(trackStop);
 
 
         CommandLineParser parser = new DefaultParser();
@@ -96,6 +107,15 @@ public class TimeTrackerCLI {
                 }
                 TablePrinter.printTableOfDate(csv.readCSV(),datum);
                 return CLIStatus.SHOW_TABLE;
+            } else if (cmd.hasOption("start")) {
+                String project = cmd.getOptionValue("start");
+                Tracking.start(project);
+                return CLIStatus.START;
+            } else if (cmd.hasOption("stop")) {
+                String description = cmd.getOptionValue("stop");
+                Event event = Tracking.stop(description);
+                csv.appendRow(event.asList());
+                return CLIStatus.STOP;
             }
         } catch (ParseException e) {
             hilfe();

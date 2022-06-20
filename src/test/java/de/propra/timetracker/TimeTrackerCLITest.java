@@ -122,4 +122,21 @@ class TimeTrackerCLITest {
         CLIStatus cliStatus = timeTrackerCLI.readCLI(arguments);
         assertThat(cliStatus).isEqualTo(CLIStatus.ERROR);
     }
+
+    @Test
+    @DisplayName("--start gibt START zurück und --stop gibt STOP zurück")
+    void readCLI14() throws IOException {
+        String[] argumentsStart = {
+                "--start",
+                "ProPra1"
+        };
+        String[] argumentsStop = {
+                "--stop",
+                "Test"
+        };
+        CLIStatus cliStatusStart = timeTrackerCLI.readCLI(argumentsStart);
+        CLIStatus cliStatusStop = timeTrackerCLI.readCLI(argumentsStop);
+        assertThat(cliStatusStart).isEqualTo(CLIStatus.START);
+        assertThat(cliStatusStop).isEqualTo(CLIStatus.STOP);
+    }
 }
